@@ -1,0 +1,80 @@
+<?php 
+
+function greet($time) {
+    if ($time >= 5 && $time < 12) return "Selamat pagi";
+    elseif ($time >= 12 && $time < 16) return "Selamat siang";
+    elseif ($time >= 16 && $time < 19) return "Selamat sore";
+    elseif ($time >= 19 && $time < 23) return "Selamat malam";
+    else return "Selamat tidur";
+}
+
+function format12time($time) {
+    if ($time < 12) return "$time AM";
+    elseif ($time == 12) return "$time PM";
+    else return $time - 12 . " PM";
+}
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jawaban 3 - Khanza Azzahra Putrida</title>
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(() => {
+
+            $("#timeTable").DataTable();
+
+        });
+    </script>
+</head>
+<body class="py-3 px-5">
+    <!-- Title -->
+    <p class="fs-3 mb-0">Web Programming</p>
+    <p>Khanza Azzahra Putrida</p>
+    <hr>
+
+    <!-- Table -->
+    <table id="timeTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Waktu 24H</th>
+                <th>Waktu 12H</th>
+                <th>Salam</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            
+            for ($i = 1; $i <= 24; $i++) {
+                $time12h = format12time($i);
+                $greeting = greet($i);
+                echo "
+                    <tr>
+                        <td>$i</td>
+                        <td>$time12h</td>
+                        <td>$greeting</td>
+                    </tr>
+                ";
+            }
+
+            ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Waktu 24H</th>
+                <th>Waktu 12H</th>
+                <th>Salam</th>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
